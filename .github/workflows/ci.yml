@@ -18,6 +18,9 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
+    - name: Rust Cache
+      uses: Swatinem/rust-cache@v2
+
     - name: Install dependencies
       run: |
         sudo apt-get update
@@ -62,10 +65,22 @@ jobs:
             type=raw,value=latest
             type=sha,format=short
 
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+            - name: Build and push Docker image
+
+              uses: docker/build-push-action@v5
+
+              with:
+
+                context: .
+
+                push: true
+
+                tags: ${{ steps.meta.outputs.tags }}
+
+                labels: ${{ steps.meta.outputs.labels }}
+
+                cache-from: type=gha
+
+                cache-to: type=gha,mode=max
+
+      
