@@ -1,6 +1,6 @@
 FROM rust:alpine as builder
 
-RUN apk add --no-cache musl-dev sqlite-dev gcc openssl-dev
+RUN apk add --no-cache musl-dev sqlite-dev gcc openssl-dev openssl-libs-static pkgconfig zlib-static
 
 WORKDIR /app
 COPY . .
