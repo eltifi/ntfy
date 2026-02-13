@@ -122,7 +122,7 @@ pub async fn run_with_addr(config: Config, addr_tx: Option<tokio::sync::oneshot:
     let file_storage = FileStorage::new(&attachment_dir, attachment_limit as u64).await?;
     let config_arc = Arc::new(config.clone());
     
-    let auth_pool = sqlx::SqlitePool::connect(&format!("sqlite:{}", config.auth_file.display())).await?;
+    let auth_pool = sqlx::SqlitePool::connect(&format!("sqlite://{}?mode=rwc", config.auth_file.display())).await?;
     sqlx::migrate!("./migrations").run(&auth_pool).await?;
 
     let auth_manager = AuthManager::new(auth_pool.clone(), config_arc.clone()).await?;
@@ -131,7 +131,7 @@ pub async fn run_with_addr(config: Config, addr_tx: Option<tokio::sync::oneshot:
         let wp_pool = if config.web_push_file == config.auth_file {
             auth_pool.clone()
         } else {
-            sqlx::SqlitePool::connect(&format!("sqlite:{}", config.web_push_file.display())).await?
+            sqlx::SqlitePool::connect(&format!("sqlite://{}?mode=rwc", config.web_push_file.display())).await?
         };
         Some(WebPushStore::new(wp_pool, config_arc.clone()).await?)
     } else {
