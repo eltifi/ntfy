@@ -1,6 +1,6 @@
 services:
   ntfy:
-    image: ghcr.io/eltifi/nfty:latest
+    image: ghcr.io/eltifi/ntfy:latest
     container_name: ntfy
     restart: unless-stopped
     expose:
