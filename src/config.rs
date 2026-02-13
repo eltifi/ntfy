@@ -3,22 +3,39 @@ use std::path::PathBuf;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Config {
+    #[serde(default)]
     pub base_url: String,
+    #[serde(default)]
     pub listen_http: String,
+    #[serde(default)]
     pub cache_file: PathBuf,
+    #[serde(default)]
     pub cache_duration: u64, // Seconds
+    #[serde(default)]
     pub auth_file: PathBuf,
+    #[serde(default)]
     pub attachment_cache_dir: PathBuf,
+    #[serde(default)]
     pub web_root: PathBuf,
+    #[serde(default)]
     pub total_attachment_size_limit: usize,
+    #[serde(default)]
     pub attachment_expiry_duration: u64, // Seconds
+    #[serde(default)]
     pub visitor_attachment_total_size_limit: usize,
+    #[serde(default)]
     pub visitor_attachment_daily_bandwidth_limit: usize,
+    #[serde(default)]
     pub message_size_limit: usize,
+    #[serde(default)]
     pub global_topic_limit: usize,
+    #[serde(default)]
     pub visitor_subscription_limit: usize,
+    #[serde(default)]
     pub visitor_request_limit_burst: usize,
+    #[serde(default)]
     pub message_delay_min: u64, // Seconds
+    #[serde(default)]
     pub message_delay_max: u64, // Seconds
     #[serde(default)]
     pub behind_proxy: bool,
