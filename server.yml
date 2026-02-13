@@ -1,0 +1,10 @@
+cache_file: "cache.db"
+listen_http: "0.0.0.0:8080"
+cache_duration: 43200
+auth_file: "auth.db"
+attachment_cache_dir: "attachments"
+message_size_limit: 4096
+global_topic_limit: 15000
+visitor_subscription_limit: 30
+visitor_request_limit_burst: 60
+behind_proxy: false

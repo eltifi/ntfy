@@ -1,0 +1,38 @@
+services:
+  ntfy:
+    image: ghcr.io/eltifi/nfty:latest
+    container_name: ntfy
+    restart: unless-stopped
+    expose:
+      - 80
+    environment:
+      - NTFY_BASE_URL=https://ntfy.example.com
+      - NTFY_LISTEN_HTTP=:80
+      - NTFY_CACHE_FILE=/var/cache/ntfy/cache.db
+      - NTFY_CACHE_DURATION=43200
+      - NTFY_AUTH_FILE=/var/cache/ntfy/auth.db
+      - NTFY_AUTH_DEFAULT_ACCESS=read-write
+      - NTFY_ATTACHMENT_CACHE_DIR=/var/cache/ntfy/attachments
+      - NTFY_TOTAL_ATTACHMENT_SIZE_LIMIT=5368709120
+      - NTFY_ATTACHMENT_EXPIRY_DURATION=10800
+      - NTFY_VISITOR_ATTACHMENT_TOTAL_SIZE_LIMIT=104857600
+      - NTFY_VISITOR_ATTACHMENT_DAILY_BANDWIDTH_LIMIT=524288000
+      - NTFY_BEHIND_PROXY=false
+      - NTFY_SMTP_SENDER_ADDR=
+      - NTFY_SMTP_SENDER_USER=
+      - NTFY_SMTP_SENDER_PASS=
+      - NTFY_SMTP_SENDER_FROM=
+      - NTFY_SMTP_SERVER_LISTEN=
+      - NTFY_SMTP_SERVER_DOMAIN=
+      - NTFY_WEB_PUSH_PUBLIC_KEY=
+      - NTFY_WEB_PUSH_PRIVATE_KEY=
+      - NTFY_WEB_PUSH_FILE=/var/cache/ntfy/webpush.db
+      - NTFY_WEB_PUSH_EMAIL_ADDRESS=
+      - NTFY_FIREBASE_KEY_FILE=
+      - NTFY_UPSTREAM_BASE_URL=
+      - NTFY_ENABLE_LOGIN=false
+    volumes:
+      - ntfy_data:/var/cache/ntfy
+
+volumes:
+  ntfy_data:
