@@ -192,7 +192,13 @@ pub async fn run_with_addr(config: Config, addr_tx: Option<tokio::sync::oneshot:
         cron_manager.run().await;
     });
 
-    let listener = tokio::net::TcpListener::bind(addr).await?;
+    let addr = if addr.starts_with(':') {
+        format!("0.0.0.0{}", addr)
+    } else {
+        addr
+    };
+
+    let listener = tokio::net::TcpListener::bind(&addr).await?;
     let bound_addr = listener.local_addr()?;
     if let Some(tx) = addr_tx {
         let _ = tx.send(bound_addr);
