@@ -117,24 +117,27 @@ impl Config {
             .set_default("base_url", "http://localhost")?
             .set_default("listen_http", ":80")?
             .set_default("cache_file", "cache.db")?
-            .set_default("cache_duration", 12 * 3600 as i64)?
+            .set_default("cache_duration", 43200 as i64)?
             .set_default("auth_file", "auth.db")?
             .set_default("attachment_cache_dir", "attachments")?
             .set_default("web_root", "client")?
-            .set_default("total_attachment_size_limit", 5 * 1024 * 1024 * 1024 as i64)?
-            .set_default("attachment_expiry_duration", 3 * 3600 as i64)?
-            .set_default("visitor_attachment_total_size_limit", 100 * 1024 * 1024 as i64)?
-            .set_default("visitor_attachment_daily_bandwidth_limit", 500 * 1024 * 1024 as i64)?
+            .set_default("total_attachment_size_limit", 5368709120 as i64)?
+            .set_default("attachment_expiry_duration", 10800 as i64)?
+            .set_default("visitor_attachment_total_size_limit", 104857600 as i64)?
+            .set_default("visitor_attachment_daily_bandwidth_limit", 524288000 as i64)?
             .set_default("message_size_limit", 4096 as i64)?
             .set_default("global_topic_limit", 15000 as i64)?
             .set_default("visitor_subscription_limit", 30 as i64)?
             .set_default("visitor_request_limit_burst", 60 as i64)?
+            .set_default("message_delay_min", 10 as i64)?
+            .set_default("message_delay_max", 259200 as i64)?
             .set_default("web_push_file", "webpush.db")?
+            .set_default("web_push_public_key", "")?
+            .set_default("web_push_private_key", "")?
+            .set_default("web_push_email_address", "")?
             .set_default("firebase_key_file", "")?
             .set_default("upstream_base_url", "")?
             .set_default("enable_login", false)?
-            .set_default("message_delay_min", 10 as i64)?
-            .set_default("message_delay_max", 3 * 24 * 3600 as i64)?
             .set_default("auth_default_access", "read-write")?
             .set_default("behind_proxy", false)?
             .set_default("smtp_sender_addr", "")?
@@ -144,9 +147,6 @@ impl Config {
             .set_default("smtp_server_listen", "")?
             .set_default("smtp_server_domain", "ntfy.sh")?
             .set_default("smtp_server_addr_prefix", "")?
-            .set_default("web_push_public_key", "")?
-            .set_default("web_push_private_key", "")?
-            .set_default("web_push_email_address", "")?
             .add_source(config::File::with_name("server.yml").required(false))
             .add_source(config::Environment::with_prefix("NTFY").separator("_"));
 
